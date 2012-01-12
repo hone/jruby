@@ -38,12 +38,14 @@ while [ -h "$PRG" ] ; do
   fi
 done
 
-JRUBY_HOME_1=`dirname "$PRG"`           # the ./bin dir
-if [ "$JRUBY_HOME_1" = '.' ] ; then
-  cwd=`pwd`
-  JRUBY_HOME=`dirname $cwd` # JRUBY-2699
-else
-  JRUBY_HOME=`dirname "$JRUBY_HOME_1"`  # the . dir
+if [ -z "$JRUBY_HOME" ]; then
+	JRUBY_HOME_1=`dirname "$PRG"`           # the ./bin dir
+	if [ "$JRUBY_HOME_1" = '.' ] ; then
+	  cwd=`pwd`
+	  JRUBY_HOME=`dirname $cwd` # JRUBY-2699
+	else
+	  JRUBY_HOME=`dirname "$JRUBY_HOME_1"`  # the . dir
+	fi
 fi
 
 if [ -z "$JRUBY_OPTS" ] ; then
